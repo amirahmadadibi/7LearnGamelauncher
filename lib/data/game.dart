@@ -8,7 +8,9 @@ class Game {
   Game(this.name, this.thumbnail, this.gameStudio, this.description, this.rate);
 
   factory Game.fromJson(Map<String, dynamic> data) {
-    return Game(data['name'], data['thumbnail'], data['game_studio'],
+    return Game(data['name'], 
+    'http://startflutter.ir/api/files/${data['collectionId']}/${data['id']}/${data['thumbnail']}'
+    , data['game_studio'],
         data['description'], data['rate']);
   }
 

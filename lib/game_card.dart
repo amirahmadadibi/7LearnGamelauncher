@@ -1,8 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import 'data/game.dart';
+
 class GameCard extends StatelessWidget {
-  const GameCard({
+  Game game;
+  GameCard(
+    this.game, {
     super.key,
   });
 
@@ -19,27 +23,28 @@ class GameCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          const Expanded(
+          Expanded(
             child: Padding(
               padding: EdgeInsets.only(bottom: 15, top: 15, left: 15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    'COD - Infinite Warfare',
-                    style: TextStyle(color: Colors.white, fontFamily: 'yekan'),
+                    game.name,
+                    style: const TextStyle(
+                        color: Colors.white, fontFamily: 'yekan'),
                   ),
-                  Text('Activision',
-                      style:
-                          TextStyle(color: Colors.white, fontFamily: 'yekan')),
-                  Text('3.9',
-                      style:
-                          TextStyle(color: Colors.white, fontFamily: 'yekan')),
-                  Text(
-                      'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون',
-                      style: TextStyle(
+                  Text(game.gameStudio,
+                      style: const TextStyle(
+                          color: Colors.white, fontFamily: 'yekan')),
+                  Text(game.rate.toString(),
+                      style: const TextStyle(
+                          color: Colors.white, fontFamily: 'yekan')),
+                  Text(game.description,
+                      maxLines: 2,
+                      style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 10,
+                          fontSize: 12,
                           fontFamily: 'yekan')),
                 ],
               ),
@@ -51,8 +56,7 @@ class GameCard extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(5),
               child: CachedNetworkImage(
-                imageUrl:
-                    'https://imgc.allpostersimages.com/img/posters/halo-3-awakening-premium-poster_u-L-F9TM7B0.jpg',
+                imageUrl: game.thumbnail,
                 placeholder: (context, url) {
                   return Container(
                     height: 120,

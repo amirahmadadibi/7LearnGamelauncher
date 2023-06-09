@@ -14,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<Game> gameList = [];
   @override
   void initState() {
     super.initState();
@@ -55,9 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: ListView.builder(
-          itemCount: 20,
+          itemCount: gameList.length,
           itemBuilder: (context, index) {
-            return GameCard();
+            return GameCard(gameList[index]);
           }),
     );
   }
@@ -67,10 +68,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
     var response =
         await dio.get('http://startflutter.ir/api/collections/games/records');
-    List<Game> gameList = response.data['items'].map<Game>((jsonObject) {
+    List<Game> gameDataList = response.data['items'].map<Game>((jsonObject) {
       return Game.fromJson(jsonObject);
     }).toList();
 
-    print(gameList);
+    setState(() {
+      gameList = gameDataList;
+    });
   }
 }
