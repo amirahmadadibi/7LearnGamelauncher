@@ -19,7 +19,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   Future<List<Game>> getData(String serachTerm) async {
     var dio = Dio();
 
-    Map<String, String> qParams = {'filter': 'name~$serachTerm'};
+    Map<String, String> qParams = {'filter': 'name~"$serachTerm"'};
     var response = await dio.get(
         'http://startflutter.ir/api/collections/games/records',
         queryParameters: qParams);

@@ -4,6 +4,8 @@ import 'package:game_laucher/searchBloc/search_bloc.dart';
 import 'package:game_laucher/searchBloc/search_event.dart';
 import 'package:game_laucher/searchBloc/search_state.dart';
 
+import 'game_card.dart';
+
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
@@ -39,6 +41,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   child: TextField(
                     controller: controller,
                     cursorColor: Colors.white,
+                    style: TextStyle(color: Colors.white),
                     decoration: const InputDecoration.collapsed(
                       hintText: "Search",
                       hintStyle: TextStyle(color: Colors.white),
@@ -48,7 +51,9 @@ class _SearchScreenState extends State<SearchScreen> {
                 )),
                 GestureDetector(
                   onTap: () {
-                    context.read<SearchBloc>().add(SearchRequested(controller.text));
+                    context
+                        .read<SearchBloc>()
+                        .add(SearchRequested(controller.text));
                   },
                   child: Image.asset('assets/images/icon_search.png'),
                 ),
@@ -60,7 +65,29 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ),
         body: BlocBuilder<SearchBloc, SearchState>(builder: (context, state) {
-          return const Text('test');
+          if (state is SearchLoading) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (state is SearchDataFetched) {
+            return ListView.builder(
+              itemCount: state.gameList.length,
+              itemBuilder: (context, index) {
+                return GameCard(state.gameList[index]);
+              },
+            );
+          }
+          if (state is SearchInit) {
+            return Center(
+              child: Text(
+                'اسم بازی مورد نظر رو سرچ کن',
+                style: TextStyle(
+                    color: Colors.white, fontSize: 20, fontFamily: 'yekan'),
+              ),
+            );
+          }
+          return Text('خطایی در دریافت اطلاعات به وجود آمده');
         }),
       ),
     );
