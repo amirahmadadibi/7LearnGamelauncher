@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:game_laucher/searchBloc/search_bloc.dart';
+import 'package:game_laucher/searchBloc/search_event.dart';
 import 'package:game_laucher/searchBloc/search_state.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -11,6 +12,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,19 +33,25 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             child: Row(
               children: [
-                const Expanded(
+                Expanded(
                     child: Padding(
-                  padding: EdgeInsets.only(left: 12),
+                  padding: const EdgeInsets.only(left: 12),
                   child: TextField(
+                    controller: controller,
                     cursorColor: Colors.white,
-                    decoration: InputDecoration.collapsed(
+                    decoration: const InputDecoration.collapsed(
                       hintText: "Search",
                       hintStyle: TextStyle(color: Colors.white),
                       border: InputBorder.none,
                     ),
                   ),
                 )),
-                Image.asset('assets/images/icon_search.png'),
+                GestureDetector(
+                  onTap: () {
+                    context.read<SearchBloc>().add(SearchRequested(controller.text));
+                  },
+                  child: Image.asset('assets/images/icon_search.png'),
+                ),
                 const SizedBox(
                   width: 8,
                 )
@@ -51,8 +59,8 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
           ),
         ),
-        body: BlocBuilder<SearchBloc,SearchState>(builder:(context,state){
-            return const Text('test');
+        body: BlocBuilder<SearchBloc, SearchState>(builder: (context, state) {
+          return const Text('test');
         }),
       ),
     );

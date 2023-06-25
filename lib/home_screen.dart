@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:game_laucher/bloc/home_bloc.dart';
 import 'package:game_laucher/bloc/home_state.dart';
 import 'package:game_laucher/game_card.dart';
+import 'package:game_laucher/searchBloc/search_bloc.dart';
 import 'package:game_laucher/search_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -15,7 +16,6 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Game Launcher'),
         backgroundColor: const Color(0xff1E1E1E),
-
         centerTitle: true,
         elevation: 0,
         leading: Container(
@@ -32,7 +32,12 @@ class HomeScreen extends StatelessWidget {
           GestureDetector(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return SearchScreen();
+                return BlocProvider(
+                  create: (context) {
+                    return SearchBloc();
+                  },
+                  child: SearchScreen(),
+                );
               }));
             },
             child: Container(
