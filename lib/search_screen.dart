@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:game_laucher/searchBloc/search_bloc.dart';
+import 'package:game_laucher/searchBloc/search_state.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -12,18 +15,19 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xff1E1E1E),
+        backgroundColor: const Color(0xff1E1E1E),
         appBar: AppBar(
           toolbarHeight: 105,
           backgroundColor: Colors.transparent,
           elevation: 0,
+          automaticallyImplyLeading: false,
           flexibleSpace: Container(
             height: 60,
             margin:
                 const EdgeInsets.only(top: 30, bottom: 35, left: 25, right: 25),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(34),
-              color: Color(0xff1AFFFFFF),
+              color: const Color(0xff1AFFFFFF),
             ),
             child: Row(
               children: [
@@ -40,14 +44,16 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 )),
                 Image.asset('assets/images/icon_search.png'),
-                SizedBox(
+                const SizedBox(
                   width: 8,
                 )
               ],
             ),
           ),
         ),
-        body: Center(child: Text('7Learn')),
+        body: BlocBuilder<SearchBloc,SearchState>(builder:(context,state){
+            return const Text('test');
+        }),
       ),
     );
   }
