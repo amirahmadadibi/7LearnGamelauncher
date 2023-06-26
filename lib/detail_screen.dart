@@ -14,20 +14,60 @@ class DetailScreen extends StatelessWidget {
       children: [
         Expanded(
           flex: 55,
-          child: Container(
-            child: CachedNetworkImage(
-              imageUrl: game.thumbnail,
-              fit: BoxFit.cover,
-              placeholder: (context, url) {
-                return Container(
-                  height: 120,
-                  width: 88,
-                  decoration: BoxDecoration(
-                      color: const Color(0xff1C82AD),
-                      borderRadius: BorderRadius.circular(12)),
-                );
-              },
-            ),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Container(
+                child: CachedNetworkImage(
+                  imageUrl: game.thumbnail,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) {
+                    return Container(
+                      height: 120,
+                      width: 88,
+                      decoration: BoxDecoration(
+                          color: const Color(0xff1C82AD),
+                          borderRadius: BorderRadius.circular(12)),
+                    );
+                  },
+                ),
+              ),
+              SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 40),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 50,
+                        width: 50,
+                        margin: const EdgeInsets.only(left: 18),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xff1Affffff),
+                        ),
+                        child: Center(
+                          child: Image.asset('assets/images/icon_back.png'),
+                        ),
+                      ),
+                      const Spacer(),
+                      Container(
+                        height: 50,
+                        width: 50,
+                        margin: const EdgeInsets.only(right: 18),
+                        decoration: const BoxDecoration(
+                          color: Color(0xff1Affffff),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: Image.asset('assets/images/icon_like.png'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
           ),
         ),
         Expanded(
