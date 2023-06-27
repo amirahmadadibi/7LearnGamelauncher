@@ -66,6 +66,13 @@ class DetailScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                        colors: [Color(0xff1E232A), Colors.transparent])),
               )
             ],
           ),
