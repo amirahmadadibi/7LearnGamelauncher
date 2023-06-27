@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:game_laucher/bloc/home_bloc.dart';
 import 'package:game_laucher/bloc/home_state.dart';
+import 'package:game_laucher/fav_screen.dart';
 import 'package:game_laucher/game_card.dart';
 import 'package:game_laucher/searchBloc/search_bloc.dart';
 import 'package:game_laucher/search_screen.dart';
@@ -18,14 +19,21 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: const Color(0xff1E1E1E),
         centerTitle: true,
         elevation: 0,
-        leading: Container(
-          margin: const EdgeInsets.only(left: 10),
-          decoration: const BoxDecoration(
-            color: Color(0xff1AFFFFFF),
-            shape: BoxShape.circle,
-          ),
-          child: Center(
-            child: Image.asset('assets/images/icon_like.png'),
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return FavScreen();
+            }));
+          },
+          child: Container(
+            margin: const EdgeInsets.only(left: 10),
+            decoration: const BoxDecoration(
+              color: Color(0xff1AFFFFFF),
+              shape: BoxShape.circle,
+            ),
+            child: Center(
+              child: Image.asset('assets/images/icon_like.png'),
+            ),
           ),
         ),
         actions: [

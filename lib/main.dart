@@ -5,6 +5,7 @@ import 'package:game_laucher/bloc/home_event.dart';
 import 'package:game_laucher/data/game.dart';
 import 'package:game_laucher/home_screen.dart';
 import 'package:game_laucher/search_screen.dart';
+import 'package:game_laucher/test_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
